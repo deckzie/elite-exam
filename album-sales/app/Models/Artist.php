@@ -20,4 +20,14 @@ class Artist extends Model
     {
         return $this->hasMany(Album::class, 'artist_code', 'code');
     }
+
+    public function albumCount()
+    {
+        return $this->albums()->count();
+    }
+
+    public function totalSales()
+    {
+        return $this->albums()->sum('sales');
+    }
 }
