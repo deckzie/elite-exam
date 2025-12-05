@@ -8,7 +8,7 @@
 
     <!-- Stats -->
     <p class="text-sm text-gray-700">Albums: {{ artist.album_count }}</p>
-    <p class="text-sm text-gray-700">Total Sales: {{ artist.total_sales }}</p>
+    <p class="text-sm text-gray-700">Total Sales: {{ artist.total_sales || 0 }}</p>
   </div>
 </template>
 

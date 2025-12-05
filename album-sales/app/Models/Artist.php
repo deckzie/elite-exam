@@ -28,6 +28,6 @@ class Artist extends Model
 
     public function totalSales()
     {
-        return $this->albums()->sum('sales');
+        return (int) $this->albums()->sum('sales');
     }
 }

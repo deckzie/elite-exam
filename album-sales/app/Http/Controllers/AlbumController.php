@@ -27,12 +27,12 @@ class AlbumController extends Controller
     {
         $album = Album::findOrFail($id);
         $album->update($request->only('artist_code', 'name', 'year', 'sales', 'cover'));
-        return response()->json($album);
+        return redirect()->back();
     }
 
     public function destroy($id)
     {
         Album::destroy($id);
-        return response()->json(null, 204);
+        return redirect()->back();
     }
 }
