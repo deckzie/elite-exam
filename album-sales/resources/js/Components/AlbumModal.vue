@@ -17,7 +17,6 @@
                 class="bg-white rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-lg w-full z-10 mx-4"
             >
                 <!-- Header -->
-                <!-- Header -->
                 <div
                     class="px-6 py-4 border-b border-gray-200 flex justify-between items-center"
                 >
@@ -150,12 +149,21 @@
                             </label>
                             <input
                                 type="file"
-                                @input="form.cover = $event.target.files[0]"
-                                class="w-full ..."
+                                @change="handleFileChange"
+                                accept=".jpg, .jpeg, .png, .webp"
+                                class="file:cursor-pointer w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                             />
+
                             <p class="text-xs text-gray-500 mt-1">
-                                Paste a direct link to a JPG, PNG, or WEBP.
+                                Upload a JPG, PNG, or WEBP (Max 2MB).
                             </p>
+
+                            <div
+                                v-if="form.errors.cover"
+                                class="text-red-500 text-xs mt-1"
+                            >
+                                {{ form.errors.cover }}
+                            </div>
                             <div
                                 v-if="form.errors.cover"
                                 class="text-red-500 text-xs mt-1"
@@ -171,7 +179,7 @@
                                 type="button"
                                 v-if="form.id"
                                 @click="deleteItem"
-                                class="inline-flex items-center justify-center rounded-md border border-red-300 px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+                                class="cursor-pointer inline-flex items-center justify-center rounded-md border border-red-300 px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                             >
                                 Delete
                             </button>
@@ -248,6 +256,27 @@ const deleteItem = () => {
             emit("close"), window.location.reload();
         },
     });
+};
+
+// Inside <script setup>
+
+const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+        form.errors.cover = "Invalid format. Only JPG, PNG, or WEBP allowed.";
+        form.cover = null;
+        event.target.value = "";
+
+        return;
+    }
+
+    form.clearErrors("cover");
+    form.cover = file;
 };
 </script>
 >
