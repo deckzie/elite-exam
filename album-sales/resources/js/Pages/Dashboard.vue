@@ -124,29 +124,23 @@ onMounted(async () => {
     <AuthenticatedLayout>
         <Head title="Dashboard" />
 
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Dashboard
-            </h2>
-            <div class="relative">
-                <input
-                    type="text"
-                    v-model="searchQuery"
-                    placeholder="Search by Artist..."
-                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full px-4 py-2"
-                />
-                <span
-                    v-if="searchQuery"
-                    class="absolute right-3 top-2.5 text-gray-400 cursor-pointer hover:text-gray-600"
-                    @click="searchQuery = ''"
-                >
-                    ✕
-                </span>
-            </div>
-        </template>
-
         <div class="flex h-screen">
-            <div class="p-6 overflow-y-auto ml-20">
+            <div class="flex-1 p-6 overflow-y-auto ml-20">
+                <div class="pb-3">
+                    <input
+                        type="text"
+                        v-model="searchQuery"
+                        placeholder="Search by Artist..."
+                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full px-4 py-2"
+                    />
+                    <span
+                        v-if="searchQuery"
+                        class="absolute right-3 top-2.5 text-gray-400 cursor-pointer hover:text-gray-600"
+                        @click="searchQuery = ''"
+                    >
+                        ✕
+                    </span>
+                </div>
                 <div
                     v-if="filteredAlbums.length === 0"
                     class="text-center text-gray-500 mt-10"
