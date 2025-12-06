@@ -164,12 +164,6 @@
                             >
                                 {{ form.errors.cover }}
                             </div>
-                            <div
-                                v-if="form.errors.cover"
-                                class="text-red-500 text-xs mt-1"
-                            >
-                                {{ form.errors.cover }}
-                            </div>
                         </div>
 
                         <!-- Actions -->

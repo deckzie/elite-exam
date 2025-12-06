@@ -12,36 +12,29 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div class="min-h-screen bg-gray-100">
-        <!-- Navigation Bar -->
-        <nav class="border-b border-gray-200 bg-white shadow-sm">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 justify-between items-center">
-                    <!-- Left: Title -->
-                    <div class="flex">
-                        <Link
-                            :href="route('dashboard')"
-                            class="flex items-center"
-                        >
-                            <span
-                                class="text-lg font-semibold text-gray-800 hover:text-indigo-600 transition"
-                            >
-                                Album Sales Data
-                            </span>
-                        </Link>
-                    </div>
+        <nav
+            class="sticky top-0 z-50 border-b border-gray-200 bg-white backdrop-blur-md shadow-sm"
+        >
+            <div class="w-[85%] mx-auto py-5 flex justify-between items-center">
+                <Link
+                    :href="route('dashboard')"
+                    class="group flex items-center gap-2"
+                >
+                    <span
+                        class="text-xl font-bold text-gray-900 hover:text-indigo-600 transition"
+                    >
+                        Album Sales Data
+                    </span>
+                </Link>
 
-                    <!-- Right: Log Out -->
-                    <div>
-                        <Link
-                            :href="route('logout')"
-                            method="post"
-                            as="button"
-                            class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                        >
-                            Log Out
-                        </Link>
-                    </div>
-                </div>
+                <Link
+                    :href="route('logout')"
+                    method="post"
+                    as="button"
+                    class="rounded-xl bg-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 transition"
+                >
+                    Log Out
+                </Link>
             </div>
         </nav>
 

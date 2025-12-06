@@ -4,7 +4,7 @@ import AlbumCard from "@/Components/AlbumCard.vue";
 import ArtistCard from "@/Components/ArtistCard.vue";
 import AlbumModal from "@/Components/AlbumModal.vue";
 import ArtistModal from "@/Components/ArtistModal.vue";
-
+import SearchBar from "@/Components/SearchBar.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, computed, onMounted } from "vue";
 import axios from "axios";
@@ -126,21 +126,10 @@ onMounted(async () => {
 
         <div class="flex h-screen">
             <div class="flex-1 p-6 overflow-y-auto ml-20">
-                <div class="pb-4 rounded-xl">
-                    <input
-                        type="text"
-                        v-model="searchQuery"
-                        placeholder="Search by Artist..."
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full px-4 py-2"
-                    />
-                    <span
-                        v-if="searchQuery"
-                        class="absolute right-3 top-2.5 text-gray-400 cursor-pointer hover:text-gray-600"
-                        @click="searchQuery = ''"
-                    >
-                        ✕
-                    </span>
-                </div>
+                <SearchBar
+                    v-model="searchQuery"
+                    placeholder="Search by Artist..."
+                />
                 <div
                     v-if="filteredAlbums.length === 0"
                     class="text-center text-gray-500 mt-10"
