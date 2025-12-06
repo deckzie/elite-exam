@@ -122,35 +122,7 @@ onMounted(async () => {
 
 <template>
     <AuthenticatedLayout>
-        <Head title="Dashboard" />
-
         <div class="flex h-full">
-            <div class="flex-1 p-6 overflow-y-auto ml-20">
-                <SearchBar
-                    v-model="searchQuery"
-                    placeholder="Search by Artist..."
-                />
-                <div
-                    v-if="filteredAlbums.length === 0"
-                    class="text-center text-gray-500 mt-10"
-                >
-                    No albums found for this artist.
-                </div>
-
-                <div
-                    v-else
-                    class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-                >
-                    <!-- Using filteredAlbums here -->
-                    <AlbumCard
-                        v-for="album in filteredAlbums"
-                        :key="album.id"
-                        :album="album"
-                        @open="openAlbumModal"
-                    />
-                </div>
-            </div>
-
             <div class="w-1/3 p-6 overflow-y-auto border-l border-gray-200">
                 <h2 class="text-xl font-bold mb-4">
                     {{ searchQuery ? "Matching Artists" : "Artist Stats" }}
@@ -167,6 +139,31 @@ onMounted(async () => {
                     :artist="artist"
                     @open="openArtistModal"
                 />
+            </div>
+            <div class="flex-1 p-10 overflow-y-auto">
+                <SearchBar
+                    v-model="searchQuery"
+                    placeholder="Search by Artist..."
+                />
+                <div
+                    v-if="filteredAlbums.length === 0"
+                    class="text-center text-gray-500 mt-10"
+                >
+                    No albums found for this artist.
+                </div>
+
+                <div
+                    v-else
+                    class="px-3 grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+                >
+                    <!-- Using filteredAlbums here -->
+                    <AlbumCard
+                        v-for="album in filteredAlbums"
+                        :key="album.id"
+                        :album="album"
+                        @open="openAlbumModal"
+                    />
+                </div>
             </div>
 
             <AlbumModal
