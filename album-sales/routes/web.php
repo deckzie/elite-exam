@@ -1,27 +1,41 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Inertia\Inertia;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\ArtistController;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+// Guest routes
+Route::middleware('guest')->group(function () {
+    // Login page
+    Route::get('/login', function () {
+        return Inertia::render('Auth/Login');
+    })->name('login');
+
+    // Handle login POST
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+        ->name('login.store');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+// Authenticated routes
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+    // Dashboard at root "/"
+    Route::get('/', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-require __DIR__.'/auth.php';
+    // Logout
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->name('logout');
+
+    // --- Albums ---
+    Route::get('/albums', [AlbumController::class, 'index'])->name('albums.index');
+    Route::put('/albums/{id}', [AlbumController::class, 'update'])->name('albums.update');
+    Route::delete('/albums/{id}', [AlbumController::class, 'destroy'])->name('albums.destroy');
+
+    // --- Artists ---
+    Route::get('/artists', [ArtistController::class, 'index'])->name('artists.index');
+    Route::put('/artists/{id}', [ArtistController::class, 'update'])->name('artists.update');
+    Route::delete('/artists/{id}', [ArtistController::class, 'destroy'])->name('artists.destroy');
+});
