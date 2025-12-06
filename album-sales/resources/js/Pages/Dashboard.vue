@@ -124,7 +124,7 @@ onMounted(async () => {
     <AuthenticatedLayout>
         <Head title="Dashboard" />
 
-        <div class="flex h-screen">
+        <div class="flex h-full">
             <div class="flex-1 p-6 overflow-y-auto ml-20">
                 <SearchBar
                     v-model="searchQuery"
