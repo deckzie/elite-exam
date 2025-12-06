@@ -149,11 +149,9 @@
                                 Album Cover
                             </label>
                             <input
-                                v-model="form.cover"
-                                @input="handleUrlInput"
-                                type="text"
-                                placeholder="https://site.com/image.jpg"
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-700"
+                                type="file"
+                                @input="form.cover = $event.target.files[0]"
+                                class="w-full ..."
                             />
                             <p class="text-xs text-gray-500 mt-1">
                                 Paste a direct link to a JPG, PNG, or WEBP.
@@ -213,7 +211,7 @@ const form = useForm({
     artist_code: "",
     year: "",
     sales: 0,
-    cover: "",
+    cover: null,
 });
 
 // Watch for changes in the 'album' prop to populate the form
@@ -235,7 +233,7 @@ watch(
 );
 
 const submit = () => {
-    form.put(route("albums.update", form.id), {
+    form.post(route("albums.update", form.id), {
         onSuccess: () => {
             emit("close"), window.location.reload();
         },

@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
     // --- Albums ---
     Route::get('/albums', [AlbumController::class, 'index'])->name('albums.index');
-    Route::put('/albums/{id}', [AlbumController::class, 'update'])->name('albums.update');
+    Route::post('/albums/{id}', [AlbumController::class, 'update'])->name('albums.update');
     Route::delete('/albums/{id}', [AlbumController::class, 'destroy'])->name('albums.destroy');
 
     // --- Artists ---

@@ -5,7 +5,7 @@
     >
         <img
             v-if="album.cover"
-            :src="album.cover"
+            :src="getCoverUrl(album.cover)"
             alt="Album Cover"
             class="w-full h-40 object-cover rounded"
         />
@@ -33,4 +33,11 @@ defineProps({
         required: true,
     },
 });
+
+const getCoverUrl = (coverPath) => {
+    if (coverPath.startsWith("http")) {
+        return coverPath;
+    }
+    return `/storage/${coverPath}`;
+};
 </script>
