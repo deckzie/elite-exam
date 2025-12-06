@@ -159,9 +159,7 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <div
-                class="w-1/3 p-6 bg-gray-50 overflow-y-auto border-l border-gray-200"
-            >
+            <div class="w-1/3 p-6 overflow-y-auto border-l border-gray-200">
                 <h2 class="text-xl font-bold mb-4">
                     {{ searchQuery ? "Matching Artists" : "Artist Stats" }}
                 </h2>

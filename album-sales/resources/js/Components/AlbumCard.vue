@@ -1,9 +1,8 @@
 <template>
     <div
-        class="bg-white shadow rounded p-4 cursor-pointer hover:shadow-lg transition"
+        class="bg-white shadow rounded-xl p-4 cursor-pointer hover:shadow-lg transition"
         @click="$emit('open', album)"
     >
-        <!-- Album cover -->
         <img
             v-if="album.cover"
             :src="album.cover"
@@ -11,7 +10,6 @@
             class="w-full h-40 object-cover rounded"
         />
 
-        <!-- State B: No cover (Placeholder) -->
         <div
             v-else
             class="w-full h-40 bg-gray-200 rounded flex items-center justify-center text-gray-500 text-sm font-medium"
