@@ -126,7 +126,7 @@ onMounted(async () => {
 
         <div class="flex h-screen">
             <div class="flex-1 p-6 overflow-y-auto ml-20">
-                <div class="pb-3">
+                <div class="pb-4 rounded-xl">
                     <input
                         type="text"
                         v-model="searchQuery"
@@ -148,7 +148,10 @@ onMounted(async () => {
                     No albums found for this artist.
                 </div>
 
-                <div v-else class="grid grid-cols-3 gap-4">
+                <div
+                    v-else
+                    class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+                >
                     <!-- Using filteredAlbums here -->
                     <AlbumCard
                         v-for="album in filteredAlbums"
