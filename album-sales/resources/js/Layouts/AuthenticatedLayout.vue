@@ -17,7 +17,7 @@ const showingNavigationDropdown = ref(false);
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 justify-between items-center">
                     <!-- Left: Title -->
-                    <div class="flex items-center">
+                    <div class="flex">
                         <Link
                             :href="route('dashboard')"
                             class="flex items-center"

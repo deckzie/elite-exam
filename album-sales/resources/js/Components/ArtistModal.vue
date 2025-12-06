@@ -6,31 +6,61 @@
             role="dialog"
             aria-modal="true"
         >
+            <!-- Overlay -->
             <div
-                class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                class="fixed inset-0 bg-gray-600 bg-opacity-60 transition-opacity"
                 @click="$emit('close')"
             ></div>
 
+            <!-- Modal -->
             <div
-                class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg w-full z-10 mx-4"
+                class="bg-white rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:max-w-lg w-full z-10 mx-4"
             >
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3
-                        class="text-lg leading-6 font-medium text-gray-900 mb-4"
-                    >
+                <!-- Header -->
+                <div
+                    class="px-6 py-4 border-b border-gray-200 flex justify-between items-center"
+                >
+                    <h3 class="text-xl font-semibold text-gray-900">
                         Edit Artist
                     </h3>
+                    <!-- Small X button -->
+                    <button
+                        type="button"
+                        @click="$emit('close')"
+                        class="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full p-1 transition"
+                        aria-label="Close"
+                    >
+                        <svg
+                            class="h-5 w-5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
 
-                    <form @submit.prevent="submit">
-                        <div class="mb-4">
+                <!-- Body -->
+                <div class="px-6 py-5">
+                    <form @submit.prevent="submit" class="space-y-5">
+                        <!-- Artist Name -->
+                        <div>
                             <label
-                                class="block text-gray-700 text-sm font-bold mb-2"
-                                >Artist Name</label
+                                class="block text-sm font-medium text-gray-700 mb-1"
                             >
+                                Artist Name
+                            </label>
                             <input
                                 v-model="form.name"
                                 type="text"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300"
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-700"
                             />
                             <div
                                 v-if="form.errors.name"
@@ -40,35 +70,28 @@
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center mt-6">
-                            <button
-                                type="submit"
-                                :disabled="form.processing"
-                                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none disabled:opacity-50"
-                            >
-                                Save Changes
-                            </button>
-
+                        <!-- Actions -->
+                        <div class="flex justify-between items-center pt-4">
+                            <!-- Delete on the left -->
                             <button
                                 type="button"
                                 v-if="form.id"
                                 @click="deleteItem"
-                                class="text-red-600 hover:text-red-800 font-bold text-sm px-4"
+                                class="inline-flex items-center justify-center rounded-md border border-red-300 px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                             >
                                 Delete
                             </button>
+
+                            <!-- Save Changes on the right -->
+                            <button
+                                type="submit"
+                                :disabled="form.processing"
+                                class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 transition"
+                            >
+                                Save Changes
+                            </button>
                         </div>
                     </form>
-                </div>
-
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 flex flex-row-reverse">
-                    <button
-                        type="button"
-                        @click="$emit('close')"
-                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                    >
-                        Cancel
-                    </button>
                 </div>
             </div>
         </div>

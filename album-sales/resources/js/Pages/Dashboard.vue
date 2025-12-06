@@ -146,7 +146,7 @@ onMounted(async () => {
         </template>
 
         <div class="flex h-screen">
-            <div class="w-2/3 p-6 overflow-y-auto">
+            <div class="p-6 overflow-y-auto ml-20">
                 <div
                     v-if="filteredAlbums.length === 0"
                     class="text-center text-gray-500 mt-10"
